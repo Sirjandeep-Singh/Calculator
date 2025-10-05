@@ -3,6 +3,10 @@ const eqevent = new MouseEvent('click', {
     bubbles : true,
     cancelable : true
 });
+const myevent = new MouseEvent('click', {
+    bubbles : true,
+    cancelable : true
+});
 //required elements for click functionality
 const equate = document.querySelector('#equate');
 const numpad = document.querySelector('.keypad');
@@ -80,7 +84,7 @@ numpad.addEventListener('click', element => {
                 break;
             case "add" :
                 if(operation%3 == 2){
-                    equate.dispatchEvent(eqevent);
+                    equate.dispatchEvent(myevent);
                 }
                 if(operation%3 == 0)operation++;
                 if(operation%3 == 1){
@@ -91,7 +95,7 @@ numpad.addEventListener('click', element => {
                 break;
             case "subtract" :
                 if(operation%3 == 2){
-                    equate.dispatchEvent(eqevent);
+                    equate.dispatchEvent(myevent);
                 }
                 if(operation%3 == 0)operation++;
                 if(operation%3 == 1){
@@ -102,7 +106,7 @@ numpad.addEventListener('click', element => {
                 break;
             case "multiply" :
                 if(operation%3 == 2){
-                    equate.dispatchEvent(eqevent);
+                    equate.dispatchEvent(myevent);
                 }
                 if(operation%3 == 0)operation++;
                 if(operation%3 == 1){
@@ -113,7 +117,7 @@ numpad.addEventListener('click', element => {
                 break;
             case "divide" :
                 if(operation%3 == 2){
-                    equate.dispatchEvent(eqevent);
+                    equate.dispatchEvent(myevent);
                 }
                 if(operation%3 == 0)operation++;
                 if(operation%3 == 1){
