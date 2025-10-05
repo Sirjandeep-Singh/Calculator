@@ -1,17 +1,24 @@
+//creates a click event manually, later used to conver keydown events to click events
 const eqevent = new MouseEvent('click', {
     bubbles : true,
     cancelable : true
 });
+//required elements for click functionality
 const equate = document.querySelector('#equate');
+const numpad = document.querySelector('.keypad');
+const display = document.querySelector('#display');
+const major = document.querySelector('.major');
+//used to perform calculator expressions, very iefficient
 let operation = null;
 let num1 = null;
 let num2 = null;
 let op = "";
 let num2exp = "";
 let num1exp = "";
-const numpad = document.querySelector('.keypad');
-const display = document.querySelector('#display');
-const major = document.querySelector('.major');
+
+//carries almost entire logic for calc, very inefficient, 
+// very non modular, 
+// should have been distributed into functions. ;/
 numpad.addEventListener('click', element => {
     const target = element.target;
     if(!target.classList.contains('button')) return;
@@ -147,6 +154,7 @@ numpad.addEventListener('click', element => {
         }
 });
 
+//a little of calculator function is carried here.
 major.addEventListener('click', element => {
     target = element.target;
     if(!target.classList.contains('button')) return;
@@ -202,7 +210,7 @@ major.addEventListener('click', element => {
             num1exp = "";
             num2exp = "";
             display.textContent = "";
-        break;
+            break;
         case 'delete':
             let len = display.textContent.length - 1;
             let delchar = display.textContent.charAt(len);
@@ -220,24 +228,86 @@ major.addEventListener('click', element => {
                     display.textContent = display.textContent.slice(0,-1);
                 }
             }
-        break;
+            break;
     }       
 });
 
-// numpad.addEventListener('mouseover', element => {
-//     const target = element.target;
-//     if(!target.classList.contains('button')) return;
-//     target.style.backgroundColor = `rgb(
-//                                     ${Math.floor(Math.random() * 256)},
-//                                     ${Math.floor(Math.random() * 256)},
-//                                     ${Math.floor(Math.random() * 256)})`
-// });
+//Adding keyboard functionality, requires all the DOMs
+const one = document.querySelector('#\\31');
+const two = document.querySelector('#\\32');
+const three = document.querySelector('#\\33');
+const four = document.querySelector('#\\34');
+const five = document.querySelector('#\\35');
+const six = document.querySelector('#\\36');
+const seven = document.querySelector('#\\37');
+const eight = document.querySelector('#\\38');
+const nine = document.querySelector('#\\39');
+const zero = document.querySelector('#\\30');
+const add = document.querySelector(`#add`);
+const multiply = document.querySelector('#multiply');
+const divide = document.querySelector('#divide');
+const subtract = document.querySelector('#subtract');
+const del = document.querySelector('#delete');
+const decimal = document.querySelector('#decimal')
+const clear = document.querySelector('#clear');
 
-// major.addEventListener('mouseover', element => {
-//     const target = element.target;
-//     if(!target.classList.contains('button')) return;
-//     target.style.backgroundColor = `rgb(
-//                                     ${Math.floor(Math.random() * 256)},
-//                                     ${Math.floor(Math.random() * 256)},
-//                                     ${Math.floor(Math.random() * 256)})`
-// });
+//simply dispatches click event for equivalent keydown event.
+ document.addEventListener('keydown' , e => {
+    const key = e.key;
+    switch(key){
+        case 'Delete' :
+            clear.dispatchEvent(eqevent);
+            break;
+        case 'Enter':
+            equate.dispatchEvent(eqevent);
+            break;
+        case "1" :
+            one.dispatchEvent(eqevent);
+            break;
+        case "2" :
+            two.dispatchEvent(eqevent);
+            break;
+        case "3" :
+            three.dispatchEvent(eqevent);
+            break;
+        case "4" :
+            four.dispatchEvent(eqevent);
+            break;
+        case "5" :
+            five.dispatchEvent(eqevent);
+            break;
+        case "6" :
+            six.dispatchEvent(eqevent);
+            break;
+        case "7" :
+            seven.dispatchEvent(eqevent);
+            break;
+        case "8" :
+            eight.dispatchEvent(eqevent);
+            break;
+        case "9" :
+            nine.dispatchEvent(eqevent);
+            break;
+        case "0" :
+            zero.dispatchEvent(eqevent);
+            break;
+        case "+" :
+            add.dispatchEvent(eqevent);
+            break;
+        case "-" :
+            subtract.dispatchEvent(eqevent);
+            break;
+        case "*" :
+            multiply.dispatchEvent(eqevent);
+            break;
+        case "/" :
+            divide.dispatchEvent(eqevent);
+            break;
+        case "." :
+            decimal.dispatchEvent(eqevent);
+            break;
+        case "Backspace" :
+            del.dispatchEvent(eqevent);
+            break;
+    }
+ });
